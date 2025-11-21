@@ -6,8 +6,8 @@ import core.basesyntax.exception.RegistrationException;
 import core.basesyntax.model.User;
 
 public class RegistrationServiceImpl implements RegistrationService {
-    private static final int MIN_LOGIN_LENGHT = 6;
-    private static final int MIN_PASSWORD_LENGHT = 6;
+    private static final int MIN_LOGIN_LENGTH = 6;
+    private static final int MIN_PASSWORD_LENGTH = 6;
     private static final int MIN_AGE = 18;
 
     private final StorageDao storageDao = new StorageDaoImpl();
@@ -18,32 +18,32 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new RegistrationException("User cannot be null");
         }
         if (user.getLogin() == null) {
-            throw new RegistrationException("User cannot be null");
+            throw new RegistrationException("Login cannot be null");
         }
-        if (user.getLogin().length() < MIN_LOGIN_LENGHT) {
+        if (user.getLogin().length() < MIN_LOGIN_LENGTH) {
             throw new RegistrationException("Login must be at least"
-                    + MIN_LOGIN_LENGHT
-                    + "characters.Provided :"
+                    + MIN_LOGIN_LENGTH
+                    + "characters. Provided: "
                     + user.getLogin());
         }
         if (user.getPassword() == null) {
             throw new RegistrationException("Password cannot be null");
         }
-        if (user.getPassword().length() < MIN_PASSWORD_LENGHT) {
+        if (user.getPassword().length() < MIN_PASSWORD_LENGTH) {
             throw new RegistrationException("Password must be at least"
-                    + MIN_PASSWORD_LENGHT
-                    + "charecrers");
+                    + MIN_PASSWORD_LENGTH
+                    + "characters");
         }
         if (user.getAge() == null) {
             throw new RegistrationException("Age cannot be null");
         }
         if (user.getAge() < MIN_AGE) {
             throw new RegistrationException("User must be at least"
-                    + MIN_AGE + "years old. Provided"
+                    + MIN_AGE + "years old. Provided: "
                     + user.getAge());
         }
         if (storageDao.get(user.getLogin()) != null) {
-            throw new RegistrationException("User with login"
+            throw new RegistrationException("User with login: "
                     + user.getLogin()
                     + "already exists");
         }
